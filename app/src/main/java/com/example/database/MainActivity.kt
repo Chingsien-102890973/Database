@@ -32,19 +32,28 @@ class MainActivity : AppCompatActivity() {
         }
 
         BtnView.setOnClickListener {
-            val rs=db.rawQuery("SELECT * FROM USERS",null)
+            val list= listOf<String>("CHING","CHINGSIEN12").toTypedArray()
+            val rs=db.rawQuery("SELECT * FROM USERS WHERE UNAME = ? AND PWD = ?",list)
             val Array:ArrayList<Model> =ArrayList()
-            if(rs.moveToFirst())
+//            if(rs.moveToFirst())
+//            {
+//                do {
+//                    var std=Model(rs.getString(1),rs.getString((2)))
+//                    Array.add(std)
+//
+//                }while (rs.moveToNext())
+//                for (i in Array) {
+//                    println(i)
+//                }
+
+            if(rs.count>0)
             {
-                do {
-                    var std=Model(rs.getString(1),rs.getString((2)))
-                    Array.add(std)
-
-                }while (rs.moveToNext())
-                for (i in Array) {
-                    println(i)
-                }
-
+                println(rs.count)
+                    Toast.makeText(applicationContext,"OK",Toast.LENGTH_SHORT).show()
+            }else
+            {
+                println(rs.count)
+                Toast.makeText(applicationContext,"ON",Toast.LENGTH_SHORT).show()
             }
 
 
